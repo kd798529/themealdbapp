@@ -24,6 +24,7 @@ class MealsViewController: UIViewController {
         
         setupViews()
         setupConstraints()
+        title = "Meal List"
     }
     
     private func setupViews() {
@@ -51,13 +52,13 @@ class MealsViewController: UIViewController {
 
 extension MealsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return meals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.backgroundColor = .systemMint
-        cell.textLabel?.text = "Food"
+        cell.textLabel?.text = meals[indexPath.row]
         return cell
     }
     

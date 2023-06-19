@@ -14,6 +14,8 @@
 		EEC4C27C2A40D4D000A119ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC4C27A2A40D4D000A119ED /* LaunchScreen.storyboard */; };
 		EEC4C2842A40D7A100A119ED /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4C2832A40D7A100A119ED /* MealsViewController.swift */; };
 		EEC4C2862A40D7E100A119ED /* MealsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4C2852A40D7E100A119ED /* MealsTableViewCell.swift */; };
+		EEC4C2882A40F4E500A119ED /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4C2872A40F4E500A119ED /* Meal.swift */; };
+		EEC4C28A2A40F9B600A119ED /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4C2892A40F9B600A119ED /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		EEC4C27D2A40D4D000A119ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEC4C2832A40D7A100A119ED /* MealsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
 		EEC4C2852A40D7E100A119ED /* MealsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsTableViewCell.swift; sourceTree = "<group>"; };
+		EEC4C2872A40F4E500A119ED /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		EEC4C2892A40F9B600A119ED /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 				EEC4C27D2A40D4D000A119ED /* Info.plist */,
 				EEC4C2832A40D7A100A119ED /* MealsViewController.swift */,
 				EEC4C2852A40D7E100A119ED /* MealsTableViewCell.swift */,
+				EEC4C2872A40F4E500A119ED /* Meal.swift */,
+				EEC4C2892A40F9B600A119ED /* NetworkService.swift */,
 			);
 			path = themealdbspp;
 			sourceTree = "<group>";
@@ -144,7 +150,9 @@
 				EEC4C2842A40D7A100A119ED /* MealsViewController.swift in Sources */,
 				EEC4C2702A40D4CF00A119ED /* AppDelegate.swift in Sources */,
 				EEC4C2722A40D4CF00A119ED /* SceneDelegate.swift in Sources */,
+				EEC4C2882A40F4E500A119ED /* Meal.swift in Sources */,
 				EEC4C2862A40D7E100A119ED /* MealsTableViewCell.swift in Sources */,
+				EEC4C28A2A40F9B600A119ED /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

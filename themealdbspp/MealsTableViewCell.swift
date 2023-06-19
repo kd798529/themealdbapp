@@ -8,6 +8,22 @@
 import UIKit
 
 class MealsTableViewCell: UITableViewCell {
+    
+    static let identifier = "MealsPageTableViewCell"
+    
+    let cellTitle: UILabel = {
+        
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let cellImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
