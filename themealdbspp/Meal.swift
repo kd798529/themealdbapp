@@ -8,7 +8,7 @@
 import Foundation
 
 struct Meal: Codable {
-    var id: String?
-    var mealName: String?
-    var mealImage: String?   
+    var idMeal: String?
+    var strMeal: String?
+    var strMealThumb: String?
 }

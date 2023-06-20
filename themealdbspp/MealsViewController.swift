@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class MealsViewController: UIViewController {
+    
+    let viewModel = MealsViewModel()
+    private var cancellables: Set<AnyCancellable> = []
     
     private let tableView: UITableView = {
         let tableview = UITableView()
@@ -15,7 +19,8 @@ class MealsViewController: UIViewController {
         return tableview
     }()
     
-    private let meals = ["Jollof", "Burger", "Pie", "Biriyani"]
+    private var meals: [Meal] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +30,9 @@ class MealsViewController: UIViewController {
         setupViews()
         setupConstraints()
         title = "Meal List"
+        viewModel.getMeals()
+        setupListeners()
+        
     }
     
     private func setupViews() {
@@ -45,6 +53,15 @@ class MealsViewController: UIViewController {
         ])
     }
     
+    private func setupListeners() {
+        viewModel.$mealsArray.sink { [weak self] meals in
+            guard let self = self else {return}
+            self.meals = meals ?? []
+            print(self.meals)
+            self.tableView.reloadData()
+        }.store(in: &cancellables)
+    }
+    
 
     
 
@@ -58,9 +75,14 @@ extension MealsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.backgroundColor = .systemMint
-        cell.textLabel?.text = meals[indexPath.row]
+        cell.textLabel?.text = meals[indexPath.row].strMeal
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let vc = MealDetailViewController()
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
