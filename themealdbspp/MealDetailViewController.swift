@@ -9,6 +9,8 @@ import UIKit
 
 class MealDetailViewController: UIViewController {
     
+    var mealID = ""
+    
     let mealNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -21,17 +23,18 @@ class MealDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(mealNameLabel)
+        setupConstraints()
 
         // Do any additional setup after loading the view.
     }
     
 
     func setupConstraints() {
+        view.addSubview(mealNameLabel)
         NSLayoutConstraint.activate([
-            mealNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            mealNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            mealNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10)
+            mealNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            mealNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            mealNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 30)
         ])
     }
     

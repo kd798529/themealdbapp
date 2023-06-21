@@ -80,8 +80,13 @@ extension MealsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let vc = MealDetailViewController()
+        let selectedMeal = meals[indexPath.row]
         
+        let vc = MealDetailViewController()
+        if let mealID = selectedMeal.idMeal {
+            vc.mealID = mealID
+        }
+
         navigationController?.pushViewController(vc, animated: true)
     }
     
