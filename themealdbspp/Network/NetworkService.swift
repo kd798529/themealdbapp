@@ -31,6 +31,25 @@ struct NetworkService {
             .eraseToAnyPublisher()
     }
     
+    func getMealById(request: GetMealByIDRequest) -> AnyPublisher<[String : String?],Error> {
+        Deferred {
+            Future { promise in
+                getMealRecipe(mealID: request.mealId) { success, data in
+                    if success {
+                        if let mealsDict = data {
+                            guard let mealArray = mealsDict.meals.first else {return}
+                            
+                            promise(.success(mealArray))
+                        }
+                    } else {
+                        promise(.failure(MealsDataError.failureRetrievingMeals))
+                    }
+                }
+            }
+        }.receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
     func getMealsData(_ completion: @escaping (_ success: Bool, _ data: [String: [Meal]]?) -> Void) {
         let urlString = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
         
@@ -60,6 +79,41 @@ struct NetworkService {
             
             completion(true, final)
                     
+        }
+        task.resume()
+        
+    }
+    
+    func getMealRecipe(mealID: String, _ completion: @escaping (_ success: Bool, _ data: MealRecipe?) -> Void) {
+        let urlString = "https://themealdb.com/api/json/v1/1/lookup.php?i=\(mealID)"
+        guard let url = URL(string: urlString) else {return}
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            var result: MealRecipe?
+            
+            do {
+                result = try JSONDecoder().decode(MealRecipe.self, from: data)
+            } catch {
+                print("Failed to Decode with error: \(error)")
+                completion(false, nil)
+            }
+            
+            guard let final = result else {
+                return
+            }
+            
+            
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print(httpResponse.statusCode)
+            }
+            
+            completion(true, final)
+            
         }
         task.resume()
         
