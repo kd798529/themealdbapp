@@ -10,6 +10,10 @@ import Combine
 
 class MealDetailViewModel {
     
-    var mealID: String = ""
+    var mealID: String
+    
+    init(mealID: String) {
+        self.mealID = mealID
+    }
     
 }
