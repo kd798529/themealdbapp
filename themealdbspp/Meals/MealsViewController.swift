@@ -61,7 +61,6 @@ class MealsViewController: UIViewController {
         viewModel.$mealsArray.sink { [weak self] meals in
             guard let self = self else {return}
             self.meals = meals ?? []
-            //print(self.meals)
             self.tableView.reloadData()
         }.store(in: &cancellables)
     }
@@ -80,8 +79,6 @@ extension MealsViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MealsPageTableViewCell", for: indexPath) as? MealsTableViewCell else {
             fatalError("the TableView could not dequeue a Custom cell in view")
         }
-        //cell.backgroundColor = .systemMint
-        //cell.textLabel?.text = meals[indexPath.row].strMeal
         
         if let label = self.meals[indexPath.row].strMeal, let imageUrlString = self.meals[indexPath.row].strMealThumb  {
             
@@ -89,8 +86,6 @@ extension MealsViewController: UITableViewDataSource, UITableViewDelegate {
             if let imgUrl = imgUrl {
                     cell.configureCell(with: imgUrl, and: label)
             }
-            print("this is the Mmeal name label: \(label)" )
-            //print(img ?? UIImage(systemName: "questionmark"))
             
         }
         
