@@ -31,7 +31,7 @@ class MealsViewModel {
                 let alphabeticallySortedMeals = meals.sorted {
                     $0.strMeal ?? "" < $1.strMeal ?? ""
                 }
-                print(alphabeticallySortedMeals)
+                //print(alphabeticallySortedMeals)
                 
                 self.mealsArray = alphabeticallySortedMeals
             })

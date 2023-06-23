@@ -14,7 +14,7 @@ class MealsTableViewCell: UITableViewCell {
     let cellTitle: UILabel = {
         
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -25,15 +25,25 @@ class MealsTableViewCell: UITableViewCell {
         return image
     }()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+ 
+        addSubview(cellTitle)
+        addSubview(cellImage)
+        
+        NSLayoutConstraint.activate([
+            cellImage.topAnchor.constraint(equalTo: topAnchor),
+            cellImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+            cellImage.leftAnchor.constraint(equalTo: leftAnchor),
+            
+            cellImage.topAnchor.constraint(equalTo: topAnchor),
+            cellImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+            cellImage.rightAnchor.constraint(equalTo: rightAnchor),
+        ])
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
+    
 }

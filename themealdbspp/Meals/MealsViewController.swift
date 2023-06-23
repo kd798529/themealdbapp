@@ -44,6 +44,9 @@ class MealsViewController: UIViewController {
     }
     
     private func setupConstraints() {
+        tableView.register(MealsTableViewCell.self, forCellReuseIdentifier: "MealsPageTableViewCell")
+        tableView.delegate = self
+        tableView.dataSource = self
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -57,7 +60,7 @@ class MealsViewController: UIViewController {
         viewModel.$mealsArray.sink { [weak self] meals in
             guard let self = self else {return}
             self.meals = meals ?? []
-            print(self.meals)
+            //print(self.meals)
             self.tableView.reloadData()
         }.store(in: &cancellables)
     }
@@ -73,16 +76,19 @@ extension MealsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MealsPageTableViewCell", for: indexPath) as! MealsTableViewCell
         cell.backgroundColor = .systemMint
-        cell.textLabel?.text = meals[indexPath.row].strMeal
+        //cell.textLabel?.text = meals[indexPath.row].strMeal
+        cell.cellTitle.text = meals[indexPath.row].strMeal
         return cell
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let selectedMeal = meals[indexPath.row]
         
-        let vc = MealDetailViewController()
+        let mealDetailVM = MealDetailViewModel(mealRecipeID: selectedMeal.idMeal ?? "")
+        
+        let vc = MealDetailViewController(viewModel: mealDetailVM)
         if let mealID = selectedMeal.idMeal {
             vc.mealID = mealID
         }
