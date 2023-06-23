@@ -15,6 +15,7 @@ class MealsViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableview = UITableView()
+        tableview.allowsSelection = true
         tableview.translatesAutoresizingMaskIntoConstraints = false
         return tableview
     }()
@@ -76,14 +77,30 @@ extension MealsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MealsPageTableViewCell", for: indexPath) as! MealsTableViewCell
-        cell.backgroundColor = .systemMint
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MealsPageTableViewCell", for: indexPath) as? MealsTableViewCell else {
+            fatalError("the TableView could not dequeue a Custom cell in view")
+        }
+        //cell.backgroundColor = .systemMint
         //cell.textLabel?.text = meals[indexPath.row].strMeal
-        cell.cellTitle.text = meals[indexPath.row].strMeal
+        
+        if let label = self.meals[indexPath.row].strMeal, let imageUrlString = self.meals[indexPath.row].strMealThumb  {
+            
+            let imgUrl = URL(string: imageUrlString)
+            if let imgUrl = imgUrl {
+                    cell.configureCell(with: imgUrl, and: label)
+            }
+            print("this is the Mmeal name label: \(label)" )
+            //print(img ?? UIImage(systemName: "questionmark"))
+            
+        }
+        
+        
+
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let selectedMeal = meals[indexPath.row]
         
         let mealDetailVM = MealDetailViewModel(mealRecipeID: selectedMeal.idMeal ?? "")
@@ -95,5 +112,7 @@ extension MealsViewController: UITableViewDataSource, UITableViewDelegate {
 
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+
     
 }
